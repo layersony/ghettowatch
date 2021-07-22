@@ -90,3 +90,9 @@ class Post(models.Model):
   def __str__(self):
     return self.title
 
+  def save_post(self):
+    self.save()
+
+  @classmethod
+  def delete_post(cls, id):
+    cls.objects.filter(id=id).delete()
