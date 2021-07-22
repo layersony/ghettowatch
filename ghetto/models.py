@@ -22,6 +22,12 @@ class Neighborhood(models.Models):
   def __str__(self):
     return self.name
 
+  def create_neigborhood(self):
+    self.save()
+
+  @classmethod
+  def delete_neigborhood(cls, id):
+    cls.objects.filter(id=id).delete()
 class Profile(models.Model):
   username = models.OneToOneField(User, on_delete=models.CASCADE)
   bio = models.TextField()
