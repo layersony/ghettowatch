@@ -55,6 +55,8 @@ class Profile(models.Model):
   def save_user_profile(sender, instance, **kwargs):
       instance.profile.save()
 
+  def __str__(self):
+    return self.username
 class Business(models.Model):
   businessname = models.CharField(max_length=200)
   info = models.CharField(max_length=200)
@@ -72,3 +74,10 @@ class Business(models.Model):
   @classmethod
   def delete_business(cls, id): 
     cls.objects.filter(id=id).delete()
+
+  @classmethod
+  def searchbusiness(cls, searchterm):
+    searchresults = cls.objects.filter(Q(businessname__icontains = searchterm))
+    return searchresults
+
+  
