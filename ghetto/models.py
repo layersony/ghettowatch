@@ -9,6 +9,9 @@ class Location(models.Model):
   def __str__(self):
     return self.location
 
+  def save_location(self):
+    self.save()
+
 class Neighborhood(models.Models):
   name = models.CharField(max_length=200)
   location = models.ForeignKey(Location, on_delete=models.SET_NULL)
