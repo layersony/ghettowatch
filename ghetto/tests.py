@@ -28,3 +28,9 @@ class TestNeighborhodd(TestCase):
 
   def test_isinstance(self):
     self.assertTrue(isinstance(self.hood, Neighborhood))
+
+  def test_deletehood(self):
+    self.hood2 = Neighborhood.objects.create(name='Embakasi', location=self.location, policehelpline='00022233211', hospitalhelpline='0092133313', occupants=8)
+    self.assertEqual(len(Neighborhood.objects.all()),2)
+    Neighborhood.delete_neigborhood(self.hood.id)
+    self.assertEqual(len(Neighborhood.objects.all()),1)
