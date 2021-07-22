@@ -13,9 +13,9 @@ class Location(models.Model):
   def save_location(self):
     self.save()
 
-class Neighborhood(models.Models):
+class Neighborhood(models.Model):
   name = models.CharField(max_length=200)
-  location = models.ForeignKey(Location, on_delete=models.SET_NULL)
+  location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
   policehelpline = models.IntegerField(null=False, blank=False)
   hospitalhelpline = models.IntegerField(null=False, blank=False)
   occupants = models.IntegerField(default=0)
@@ -35,16 +35,17 @@ class Neighborhood(models.Models):
     searchresults = cls.objects.filter(Q(name__icontains=searchterm))
     return searchresults
 
-  def update_neighborhood(cls, id, **kwargs):
-    cls.objects.filter(id=id).update(**kwargs)
+  @classmethod
+  def update_neighborhood(cls, id, name):
+    cls.objects.filter(id=id).update(name=name)
 
 class Profile(models.Model):
   username = models.OneToOneField(User, on_delete=models.CASCADE)
   bio = models.TextField()
   phone = models.IntegerField()
   profilePic = models.ImageField(upload_to='userProfile/', default='userProfile/test.png')
-  location = models.ForeignKey(Location, on_delete=models.SET_NULL)
-  neighborhood = models.ForeignKey(Neighborhood, on_delete=models.SET_NULL, null=False, blank=False)
+  location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
+  neighborhood = models.ForeignKey(Neighborhood, on_delete=models.SET_NULL, null=True, blank=True)
 
   @receiver(post_save, sender=User)
   def create_user_profile(sender, instance, created, **kwargs):
@@ -57,6 +58,7 @@ class Profile(models.Model):
 
   def __str__(self):
     return self.username
+
 class Business(models.Model):
   businessname = models.CharField(max_length=200)
   info = models.CharField(max_length=200)
@@ -80,7 +82,6 @@ class Business(models.Model):
     searchresults = cls.objects.filter(Q(businessname__icontains = searchterm))
     return searchresults
 
-  
 class Post(models.Model):
   title = models.CharField(max_length=200, null=False, blank=False)
   story = models.TextField()
