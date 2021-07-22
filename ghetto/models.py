@@ -81,3 +81,12 @@ class Business(models.Model):
     return searchresults
 
   
+class Post(models.Model):
+  title = models.CharField(max_length=200, null=False, blank=False)
+  story = models.TextField()
+  postuser = models.ForeignKey(Profile, on_delete=models.CASCADE)
+  neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.title
+
