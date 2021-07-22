@@ -12,7 +12,7 @@ class TestLocation(TestCase):
   def test_isinstance(self):
     self.assertTrue(isinstance(self.location, Location))
 
-  def save_location(self):
+  def test_save_location(self):
     self.location2 = Location.objects.create(location='Nairobi')
     self.assertEqual(len(Location.objects.all()), 2)
 
@@ -34,3 +34,14 @@ class TestNeighborhodd(TestCase):
     self.assertEqual(len(Neighborhood.objects.all()),2)
     Neighborhood.delete_neigborhood(self.hood.id)
     self.assertEqual(len(Neighborhood.objects.all()),1)
+
+  def test_findneighborhood(self):
+    searchterm = 'Embakasi'
+    self.hood2 = Neighborhood.objects.create(name='Embakasi', location=self.location, policehelpline='00022233211', hospitalhelpline='0092133313', occupants=8)
+    results = Neighborhood.find_neigborhood(searchterm)
+    self.assertTrue(len(results), 1)
+
+  def test_updateneighbor(self):
+    self.hood2 = Neighborhood.objects.create(name='Embakasi', location=self.location, policehelpline='00022233211', hospitalhelpline='0092133313', occupants=8)
+    updated = Neighborhood.update_neighborhood(self.hood2.id, name='kajiado')
+    self.assertEqual(updated.name, 'kajiado')
