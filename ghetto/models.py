@@ -35,3 +35,15 @@ class Profile(models.Model):
   @receiver(post_save, sender=User)
   def save_user_profile(sender, instance, **kwargs):
       instance.profile.save()
+
+class Business(models.Model):
+  businessname = models.CharField(max_length=200)
+  info = models.CharField(max_length=200)
+  description = models.TextField()
+  email = models.EmailField(max_length=200)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  Neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.businessname
+    
