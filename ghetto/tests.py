@@ -63,3 +63,17 @@ class TestProfile(TestCase):
   def test_isinstance(self):
     self.assertTrue(isinstance(self.newprofile, Profile))
 
+class TestBusiness(TestCase):
+  def setUp(self):
+    self.location = Location.objects.create(location='Machakos')
+    self.newuser = User.objects.create(username = 'layersony')
+    self.hood = Neighborhood.objects.create(name='Kisumu Ndogo', location=self.location, policehelpline=2, hospitalhelpline=2, occupants=8)
+    self.business = Business.objects.create(businessname = 'trial1', info='this is trial1 info', description='description for trial1', email='sammaingi5@gmail.com', username=self.newuser, neighborhood=self.hood)
+
+  def tearDown(self):
+    User.objects.all().delete()
+    Neighborhood.objects.all().delete()
+    Business.objects.all().delete()
+
+  def test_isinstance(self):
+    self.assertTrue(isinstance(self.business, Business))  
