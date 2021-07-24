@@ -13,3 +13,14 @@ class ProfileForm(forms.ModelForm):
       fields = '__all__'
       exclude = ['username', 'count',]
 
+class BusinessForm(forms.ModelForm):
+  class Meta:
+    model = Business
+    fields = '__all__'
+    exclude = ['username', 'neighborhood', ]
+
+class PostiiForm(forms.ModelForm):
+  class Meta:
+    model = Postii
+    fields = ('posttitle', 'story', )
+    exclude = ['postuser', 'neighborhood']
