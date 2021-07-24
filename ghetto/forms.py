@@ -24,3 +24,4 @@ class PostiiForm(forms.ModelForm):
     model = Postii
     fields = ('posttitle', 'story', )
     exclude = ['postuser', 'neighborhood']
+    

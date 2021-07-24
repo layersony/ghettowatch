@@ -90,7 +90,7 @@ class Postii(models.Model):
   neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
 
   def __str__(self):
-    return self.title
+    return self.posttitle
 
   def save_post(self):
     self.save()
