@@ -1,6 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Postii, Business, Neighborhood, Profile
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from .forms import UserForm, ProfileForm, BusinessForm, PostiiForm
+from django.contrib import messages
+
 
 @login_required(login_url='/accounts/login/')
 def index(request):
@@ -22,6 +26,8 @@ def index(request):
         }
         return render(request, 'index.html', params)
 
+
+@login_required(login_url='/accounts/login/')
 def profile(request):
     if request.method == 'POST':
         userform = UserForm(request.POST, instance=request.user)
@@ -50,10 +56,27 @@ def profile(request):
 
         return redirect('uprofile')
 
+    curr_user = Profile.objects.get(username=request.user)
     userform = UserForm()
     profileform = ProfileForm()
     businessform = BusinessForm()
     postiiform = PostiiForm()
+
+    allbusiness = Business.objects.filter(username=request.user)
+    stories = Postii.objects.filter(postuser=request.user)
+
+    params = {
+        'curr_user': curr_user,
+        'userform': userform,
+        'profileform': profileform,
+        'businessform': businessform,
+        'postiiform': postiiform,
+        'allbusiness': allbusiness,
+        'stories': stories
+    }
+    return render(request, 'profile/index.html', params)
+
+
 @login_required(login_url='/accounts/login/')
 def search(request):
     if 'search' in request.GET and request.GET['search']:
