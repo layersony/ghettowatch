@@ -11,5 +11,11 @@ def landing(request):
 def profile(request):
   return render(request, 'profile/profile.html')
 
+@login_required(login_url='/accounts/login/')
 def search(request):
-  return render(request, 'search.html')
+    if 'search' in request.GET and request.GET['search']:
+        search_term = request.GET.get('search')
+        searchresults = Business.searchbusiness(search_term)
+        return render(request, 'search.html', {'searchresults': searchresults, 'search_term': search_term})
+    else:
+        return redirect('home')
