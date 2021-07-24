@@ -2,11 +2,25 @@ from django.shortcuts import render
 from .models import Postii, Business, Neighborhood, Profile
 from django.contrib.auth.models import User
 
+@login_required(login_url='/accounts/login/')
 def index(request):
-  return render(request, 'index.html')
+    if request.user.profile.neighborhood == None:
+        messages.success(request, 'Please fillout you Neighbourhood')
+        return redirect('uprofile')
+    else:
+        neighdetails = Neighborhood.objects.get(
+            name=request.user.profile.neighborhood)
+        businesses = Business.objects.filter(
+            neighborhood=request.user.profile.neighborhood)
+        stories = Postii.objects.filter(
+            neighborhood=request.user.profile.neighborhood)
 
-def landing(request):
-  return render(request, 'profile/landing.html')
+        params = {
+            'neighdetails': neighdetails,
+            'businesses': businesses,
+            'stories': stories,
+        }
+        return render(request, 'index.html', params)
 
 def profile(request):
   return render(request, 'profile/profile.html')
