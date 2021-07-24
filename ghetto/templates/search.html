@@ -1,1 +1,17 @@
-<h1>search</h1>
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center mt-5 mb-5">Search for {{ search_term }}</h1>
+  <div class="container-fluid mb-5">
+    <div class="wrapper-grid justify-content-center align-items-center text-center mb-5">
+      {% for business in searchresults %}
+      <p>{{ business.name }}</p>
+      <p>{{ business.info }}</p>
+      <p>{{ business.description }}</p>
+      <p>{{ business.email }}</p>
+      {% empty %}
+      <p class="alert alert-info text-center">No Search Results for {{ search_term }}</p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
