@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: ubuntu;
+}
+
+body{
+  background-color: rgb(255, 255, 255);
+}
+.navbar-brand{
+  font-family: 'Otomanopee One', sans-serif;
+  color: white;
+  font-size: 30px;
+}
+.navbar-brand:hover{
+  font-family: 'Otomanopee One', sans-serif;
+  border-bottom: None;
+  color: white;
+}
+
+.navbar{
+  background-color: rgb(21, 21, 53);
+  min-height: 13vh;
+  color: black;
+}
+.navbar-nav a{
+  color: white;
+  font-size: 20px;
+}
+.navbar-nav a:hover{
+  border-bottom: 2px solid white;
+}
+.userpic{
+  max-width: 250px;
+}
+
+.wrapper {
+  min-height: 180px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.wrapper::-webkit-scrollbar{
+  width: 3px;
+  height: 8px;
+}
+.wrapper::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 10px;
+  width: none;
+  /* display: none; */
+}
+.wrapper .item {
+  border-radius: 2px;
+  min-width: 250px;
+  min-height: 180px;
+  background-color: rgba(228, 228, 228, 0.425);
+  border: 0.1px solid;
+}
+
+.wrapper-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem ,30rem));
+  justify-content: center;
+}
+
+.story{
+  border-bottom: 1px solid;
+}
+.hoodinfo{
+  width: 800px;
+}
+
+.hoodname{
+  font-size: 60px;
+}
+.searchButton{
+  display: none;
+}
+input[type=search]{
+  border-radius: 20px;
+  padding: 10px;
+  color: black;
+}
+
+/*****hr******/
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 30px;
+}
+
+.separator::before,
+.separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 2px solid #000;
+}
+
+.separator:not(:empty)::before {
+  margin-right: .90em;
+}
+
+.separator:not(:empty)::after {
+  margin-left: .90em;
+}
+/*****endhr******/
