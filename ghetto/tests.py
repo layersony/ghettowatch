@@ -69,7 +69,7 @@ class TestBusiness(TestCase):
     self.location = Location.objects.create(location='Machakos')
     self.newuser = User.objects.create(username = 'layersony')
     self.hood = Neighborhood.objects.create(name='Kisumu Ndogo', location=self.location, policehelpline=2, hospitalhelpline=2, occupants=8)
-    self.business = Business.objects.create(businessname = 'trial1', info='this is trial1 info', description='description for trial1', email='sammaingi5@gmail.com', username=self.newuser, neighborhood=self.hood)
+    self.business = Business.objects.create(businessname = 'trial1', description='description for trial1', email='sammaingi5@gmail.com', username=self.newuser, neighborhood=self.hood)
 
   def tearDown(self):
     User.objects.all().delete()
@@ -80,18 +80,18 @@ class TestBusiness(TestCase):
     self.assertTrue(isinstance(self.business, Business))  
 
   def test_save_business(self):
-    self.business2 = Business.objects.create(businessname = 'trial2', info='this is trial2 info', description='description for trial2', email='sammaingi5@gmail.com', username=self.newuser, neighborhood=self.hood)
+    self.business2 = Business.objects.create(businessname = 'trial2', description='description for trial2', email='sammaingi5@gmail.com', username=self.newuser, neighborhood=self.hood)
     self.assertEqual(len(Business.objects.all()), 2)
 
 
   def test_delete_business(self):
-    self.business2 = Business.objects.create(businessname = 'trial2', info='this is trial2 info', description='description for trial2', email='sammaingi5@gmail.com', username=self.newuser, neighborhood=self.hood)
+    self.business2 = Business.objects.create(businessname = 'trial2', description='description for trial2', email='sammaingi5@gmail.com', username=self.newuser, neighborhood=self.hood)
     self.assertEqual(len(Business.objects.all()), 2)
     Business.delete_business(self.business2.id)
     self.assertEqual(len(Business.objects.all()), 1)
 
   def test_searchbusiness(self):
-    self.business2 = Business.objects.create(businessname = 'trial2', info='this is trial2 info', description='description for trial2', email='sammaingi5@gmail.com', username=self.newuser, neighborhood=self.hood)
+    self.business2 = Business.objects.create(businessname = 'trial2', description='description for trial2', email='sammaingi5@gmail.com', username=self.newuser, neighborhood=self.hood)
     searchterm = 'trial2'
     searchresults = Business.searchbusiness(searchterm)
     self.assertEqual(len(searchresults), 1)

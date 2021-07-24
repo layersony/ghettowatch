@@ -13,6 +13,12 @@ class Location(models.Model):
   def save_location(self):
     self.save()
 
+class Category(models.Model):
+  category = models.CharField(max_length=100)
+
+  def __str__(self):
+    return self.category
+
 class Neighborhood(models.Model):
   name = models.CharField(max_length=200)
   location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
@@ -62,7 +68,7 @@ class Profile(models.Model):
 
 class Business(models.Model):
   businessname = models.CharField(max_length=200)
-  info = models.CharField(max_length=200)
+  category = models.ManyToManyField(Category, blank=True)
   description = models.TextField()
   email = models.EmailField(max_length=200)
   username = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
@@ -86,6 +92,7 @@ class Business(models.Model):
 class Postii(models.Model):
   posttitle = models.CharField(max_length=200, null=False, blank=False)
   story = models.TextField()
+  timeuploaded = models.DateTimeField(auto_now_add=True)
   postuser = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
   neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
 
