@@ -7,12 +7,16 @@
 }
 
 body{
-  background-color: rgb(255, 255, 255);
+  background: rgba(0, 0, 0, 0) url('../images/bg2.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-blend-mode: lighten;
 }
 .navbar-brand{
   font-family: 'Otomanopee One', sans-serif;
   color: white;
-  font-size: 30px;
+  font-size: 35px;
 }
 .navbar-brand:hover{
   font-family: 'Otomanopee One', sans-serif;
@@ -21,19 +25,25 @@ body{
 }
 
 .navbar{
-  background-color: rgb(21, 21, 53);
+  background-color: black;
   min-height: 13vh;
-  color: black;
+  color: white;
 }
 .navbar-nav a{
   color: white;
   font-size: 20px;
 }
-.navbar-nav a:hover{
-  border-bottom: 2px solid white;
+.navbar-nav i{
+  font-size: 35px;
 }
+
+.hambars{
+  font-size: 20px;
+  color: white;
+}
+
 .userpic{
-  max-width: 250px;
+  max-width: 170px;
 }
 
 .wrapper {
@@ -56,7 +66,8 @@ body{
   min-width: 250px;
   min-height: 180px;
   background-color: rgba(228, 228, 228, 0.425);
-  border: 0.1px solid;
+  border: 1px solid;
+  border-top: none;
 }
 
 .wrapper-grid{
@@ -107,3 +118,14 @@ input[type=search]{
   margin-left: .90em;
 }
 /*****endhr******/
+
+
+
+@media screen and (max-width:500px) {
+  .navbar-nav i{
+    font-size: 20px;
+  }
+  .navbar-brand{
+    font-size: 23px;
+  }
+}

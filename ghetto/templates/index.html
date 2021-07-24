@@ -40,10 +40,9 @@
         <p>Description: {{ business.description }}</p>
         <p>Seller: {{ business.username }}</p>
         <sub><i class="fad fa-envelope"></i> {{ business.email }}</sub><br>
-        <sub><i class="fad fa-info-circle"></i> {{ business.info }}</sub>
       </div>
       {% empty %}
-      <p class="alert alert-info">You don't have any Business SetUp</p>
+      <p class="alert alert-info text-center">You don't have any Business SetUp</p>
       {% endfor %}
     </div>
   </div>
@@ -65,7 +64,9 @@
       <sub>By {{ story.postuser }}</sub>
     </div>
     {% empty %}
-    <p class="alert alert-info">No Mushene Available</p>
+    <div class="container">
+      <h6 class="alert alert-info text-center">No Mushene Available</h6>
+    </div>
     {% endfor %}
   </div>
 </div>

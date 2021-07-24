@@ -1,12 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'registration/base.html' %}
 
 {% load bootstrap4 %}
 {% block content %}
-<div class="container">
+<div class="container ">
   <div class="row">
     <!-- Empty div -->
     <div class="col-md-4"></div>
-    <div class="col-md-4">
+    <div class="col-md-4 registration p-3">
       {% if form.errors %}
         <p> Some Information Might be Incorrect </p>
       {% endif %}
@@ -19,6 +19,7 @@
 
           <form  action="/accounts/register/" method="post">
             {% csrf_token %}
+            
             {% bootstrap_form form %}
             <div class="form-group">
               <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
@@ -31,7 +32,7 @@
         </div>
 
       </div>
-
+      <p>Already A part Us <a href="/accounts/login/">Come and Sign In</a></p>
     </div>
     <!-- empty div -->
     <div class="col-md-4"></div>
