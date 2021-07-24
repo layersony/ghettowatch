@@ -1,1 +1,45 @@
-<h1>this is index</h1>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>neighborhood name: {{ neighdetails.name }}</p>
+<p>Location: {{ neighdetails.location }}</p>
+<p>Police Helpline: {{ neighdetails.policehelpline }}</p>
+<p>Hospital Helpline: {{ neighdetails.hospitalhelpline }}</p>
+<hr>
+<h2>Business</h2>
+<form class="form-inline d-flex flex-column justify-content-center align-items-center searchdivform p-2" role="search" action='{% url "search" %}'>
+  <div class="searchform">
+    <div class="search">
+      <input class="form-control" name="search" type="search" placeholder="Search Business..." aria-label="Search">
+      <button type="submit" class="searchButton btn"><i class="fad fa-search"></i></button>
+    </div>
+  </div>
+</form>
+
+{% for business in businesses %}
+  <p>{{ business.name }}</p>
+  <p>{{ business.info }}</p>
+  <p>{{ business.description }}</p>
+  <p>{{ business.email }}</p>
+  <p>{{ business.username }}</p>
+
+{% empty %}
+<p class="alert alert-info text-center">No Businesses Can add Yours</p>
+{% endfor %}
+<hr>
+
+<h2>Stories</h2>
+
+<div>
+  <h4>Mushene</h4>
+  {% for story in stories %}
+    <p>{{ story.posttitle }}</p>
+    <p>{{ story.story }}</p>
+    <p>{{ story.postuser }}</p>
+  
+  {% empty %}
+    <p class="alert alert-info">No Mushene Available</p>
+  {% endfor %}
+</div>
+{% endblock %}
