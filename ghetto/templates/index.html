@@ -1,45 +1,74 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<p>neighborhood name: {{ neighdetails.name }}</p>
-<p>Location: {{ neighdetails.location }}</p>
-<p>Police Helpline: {{ neighdetails.policehelpline }}</p>
-<p>Hospital Helpline: {{ neighdetails.hospitalhelpline }}</p>
-<hr>
-<h2>Business</h2>
-<form class="form-inline d-flex flex-column justify-content-center align-items-center searchdivform p-2" role="search" action='{% url "search" %}'>
-  <div class="searchform">
-    <div class="search">
-      <input class="form-control" name="search" type="search" placeholder="Search Business..." aria-label="Search">
-      <button type="submit" class="searchButton btn"><i class="fad fa-search"></i></button>
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="row hoodinfo">
+    <div class="col-md-6 p-3">
+      <h6>Hood name:</h6>
+      <h1 class="hoodname">{{ neighdetails.name }}</h1>
+      <p>Location: {{ neighdetails.location }}</p>
+    </div>
+    <div class="col-md-6 p-2">
+      <h6>Police Helpline:</h6>
+      <i class="fad fa-phone"></i><a href="tel:+{{ neighdetails.policehelpline }}"> +254-{{ neighdetails.policehelpline }}</a>
+      <p></p>
+      <h6>Hospital Helpline</h6>
+      <i class="fad fa-phone"></i><a href="tel:+{{ neighdetails.hospitalhelpline }}"> +254-{{ neighdetails.hospitalhelpline }}</a>
     </div>
   </div>
-</form>
+</div>
 
-{% for business in businesses %}
-  <p>{{ business.name }}</p>
-  <p>{{ business.info }}</p>
-  <p>{{ business.description }}</p>
-  <p>{{ business.email }}</p>
-  <p>{{ business.username }}</p>
+<hr>
+<div class="p-3">
+  <div class="container">
+    <div class="separator mt-md-5 mb-md-5">Business</div>
+  </div>
+  <form class="form-inline d-flex flex-column justify-content-center align-items-center searchdivform p-2" role="search" action='{% url "search" %}'>
+    <div class="searchform">
+      <div class="search">
+        <input class="form-control" name="search" type="search" placeholder="Search Business..." aria-label="Search">
+        <button type="submit" class="searchButton btn"><i class="fad fa-search"></i></button>
+      </div>
+    </div>
+  </form>
 
-{% empty %}
-<p class="alert alert-info text-center">No Businesses Can add Yours</p>
-{% endfor %}
+  <div>
+    <div class="wrapper d-flex">
+      {% for business in businesses %}
+      <div class="item p-2 m-2">
+        <h4>{{ business.businessname|capfirst }}</h4>
+        <p>Description: {{ business.description }}</p>
+        <p>Seller: {{ business.username }}</p>
+        <sub><i class="fad fa-envelope"></i> {{ business.email }}</sub><br>
+        <sub><i class="fad fa-info-circle"></i> {{ business.info }}</sub>
+      </div>
+      {% empty %}
+      <p class="alert alert-info">You don't have any Business SetUp</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
 <hr>
 
-<h2>Stories</h2>
+<div class="p-3">
+<div class="container">
+  <div class="separator mt-md-5 mb-md-5">Stories</div>
+</div>
 
 <div>
-  <h4>Mushene</h4>
-  {% for story in stories %}
-    <p>{{ story.posttitle }}</p>
-    <p>{{ story.story }}</p>
-    <p>{{ story.postuser }}</p>
-  
-  {% empty %}
+  <div class="wrapper-grid justify-content-center align-items-center mb-5 container">
+    {% for story in stories %}
+    <div class="story mr-3 mt-2 p-2">
+      <h5>{{ story.posttitle|capfirst }}</h5>
+      <p>{{ story.story }}</p>
+      <sub>By {{ story.postuser }}</sub>
+    </div>
+    {% empty %}
     <p class="alert alert-info">No Mushene Available</p>
-  {% endfor %}
+    {% endfor %}
+  </div>
 </div>
+</div>
+
 {% endblock %}
