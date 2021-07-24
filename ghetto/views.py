@@ -30,7 +30,7 @@ def index(request):
 @login_required(login_url='/accounts/login/')
 def profile(request):
     if request.method == 'POST':
-        userform = UserForm(request.POST, instance=request.user)
+        userform = UserForm(request.POST or None, instance=request.user)
         profileform = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         businessform = BusinessForm(request.POST)
         postiiform = PostiiForm(request.POST)
@@ -45,7 +45,7 @@ def profile(request):
         if businessform.is_valid():
             busi = businessform.save(commit=False)
             busi.username = request.user
-            busi.neighborhood = request.user.profile.neighborhood
+            busi.neighborhood = curr_neighbourhood
             busi.save()
 
         if postiiform.is_valid():
@@ -55,10 +55,10 @@ def profile(request):
             post.save()
 
         return redirect('uprofile')
-
+        
     curr_user = Profile.objects.get(username=request.user)
-    userform = UserForm()
-    profileform = ProfileForm()
+    userform = UserForm(instance=request.user)
+    profileform = ProfileForm(instance=request.user.profile)
     businessform = BusinessForm()
     postiiform = PostiiForm()
 
