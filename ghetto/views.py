@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import UserForm, ProfileForm, BusinessForm, PostiiForm
 from django.contrib import messages
-
+from django.http import JsonResponse
 
 @login_required(login_url='/accounts/login/')
 def index(request):
@@ -29,7 +29,9 @@ def index(request):
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
+    print(request.GET)
     if request.method == 'POST':
+        print(request.POST)
         userform = UserForm(request.POST or None, instance=request.user)
         profileform = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         businessform = BusinessForm(request.POST)
@@ -85,3 +87,12 @@ def search(request):
         return render(request, 'search.html', {'searchresults': searchresults, 'search_term': search_term})
     else:
         return redirect('home')
+
+def searchajax(request):
+    search_term = request.GET.get('search')
+    searchresults = Business.searchbusiness(search_term)
+    data = {
+        'searchresults':searchresults,
+        'search_term':search_term
+    }
+    return JsonResponse(data)

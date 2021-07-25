@@ -6,7 +6,8 @@ from django.conf import settings
 urlpatterns = [
   path('index/', views.index, name='home'),
   path('', views.profile, name='uprofile'),
-  path('search/', views.search, name='search')
+  path('search/', views.search, name='search'),
+  path('ajax/search/', views.searchajax, name='searchajax')
 ]
 
 if settings.DEBUG:
