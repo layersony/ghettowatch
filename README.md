@@ -23,7 +23,7 @@ User Can :-
 ## Access the website
 Need the latest browser to be able to View
 
-Follow this link 
+Follow this link https://ghettowatch.herokuapp.com/index/
 
 It is hosted by heroku
 
